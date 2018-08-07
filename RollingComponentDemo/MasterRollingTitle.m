@@ -10,16 +10,9 @@
 
 @implementation MasterRollingTitle
 
-
--(instancetype)initWithFrame:(CGRect)frame And:(NSString *)titleStr Andsubtitle:(NSString *)subtitleStr
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [UIColor grayColor];
-        [self setupRollingViewComponentWith:titleStr Andsubtitle:subtitleStr];
-    }
-    return self;
-
+-(void)setTitleAndSubtitleWith:(NSString *)titleStr And:(NSString *)subtitleStr{
+    [self stopRolling];
+    [self setupRollingViewComponentWith:titleStr Andsubtitle:subtitleStr];
 }
 
 -(UILabel *)titleLabel
@@ -50,6 +43,27 @@
     return _subtitleLabel;
 }
 
+-(UIView *)topMaskView{
+    if (!_topMaskView) {
+        _topMaskView = [UIView new];
+        _topMaskView.backgroundColor = [UIColor greenColor];
+        [self addSubview:_topMaskView];
+    }
+    
+    return _topMaskView;
+}
+
+-(UIView *)bottomMaskView{
+    if (!_bottomMaskView) {
+        _bottomMaskView = [UIView new];
+        _bottomMaskView.backgroundColor = [UIColor blueColor];
+        [self addSubview:_bottomMaskView];
+    }
+    
+    return _bottomMaskView;
+}
+
+
 
 -(void)setupRollingViewComponentWith:(NSString *)titleStr Andsubtitle:(NSString *)subtitleStr
 {
@@ -66,19 +80,14 @@
     } else {
         self.titleLabel.frame =CGRectMake(0, 45/2-15/2, self.frame.size.width, 15);
         self.titleLabel.text = titleStr;
-        self.titleLabel.backgroundColor = [UIColor yellowColor];
-
+        self.titleLabel.backgroundColor = [UIColor whiteColor];
+        
     }
-
-    UIView *topMaskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 15)];
-    topMaskView.backgroundColor = [UIColor purpleColor];
-    topMaskView.alpha = 1;
-    UIView *bottomMaskView = [[UIView alloc] initWithFrame:CGRectMake(0, 30, self.frame.size.width, 15)];
-    bottomMaskView.backgroundColor = [UIColor purpleColor];
-    bottomMaskView.alpha = 1;
     
-    [self addSubview:topMaskView];
-    [self addSubview:bottomMaskView];
+    self.topMaskView.frame = CGRectMake(0, 0, self.frame.size.width, 15);
+    self.bottomMaskView.frame = CGRectMake(0, 30, self.frame.size.width, 15);
+    
+    NSLog(@"%@  %f",titleStr, self.frame.size.width);
 }
 
 
@@ -147,3 +156,5 @@
 
 
 @end
+
+

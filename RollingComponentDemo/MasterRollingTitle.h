@@ -16,11 +16,16 @@
 }
 @property(nonatomic, strong) UILabel *titleLabel;      //主标题
 @property(nonatomic, strong) UILabel *subtitleLabel;   //子标题
+@property(nonatomic, strong) UIView *topMaskView;      //上部遮罩
+@property(nonatomic, strong) UIView *bottomMaskView;   //下部遮罩
 
--(instancetype)initWithFrame:(CGRect)frame And:(NSString *) titleStr Andsubtitle:(NSString *) subtitleStr;
+-(void)setTitleAndSubtitleWith:(NSString *) titleStr And:(NSString *) subtitleStr;
+
 
 -(void)startRolling;
 
 -(void)stopRolling;
 
 @end
+
+
