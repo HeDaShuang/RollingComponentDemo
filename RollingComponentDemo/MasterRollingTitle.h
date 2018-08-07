@@ -11,7 +11,6 @@
 @interface MasterRollingTitle : UIView
 {
     NSTimer *rollingTimer;    //滚动定时器
-    CGFloat selfheight;
     BOOL showFlag;
 }
 @property(nonatomic, strong) UILabel *titleLabel;      //主标题
