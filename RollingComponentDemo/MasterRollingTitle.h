@@ -11,18 +11,16 @@
 @interface MasterRollingTitle : UIView
 {
     NSTimer *rollingTimer;    //滚动定时器
-    
-    CGFloat selfwidth;
     CGFloat selfheight;
-    
-    BOOL testflag;
+    BOOL showFlag;
 }
-
-
-@property(nonatomic, assign) BOOL hassubtitleFlag;     //是否有子标题  有子标题则开始动画
 @property(nonatomic, strong) UILabel *titleLabel;      //主标题
 @property(nonatomic, strong) UILabel *subtitleLabel;   //子标题
 
+-(instancetype)initWithFrame:(CGRect)frame And:(NSString *) titleStr Andsubtitle:(NSString *) subtitleStr;
+
 -(void)startRolling;
+
+-(void)stopRolling;
 
 @end
