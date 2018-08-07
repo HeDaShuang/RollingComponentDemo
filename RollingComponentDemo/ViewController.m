@@ -28,7 +28,6 @@
     
     MasterRollingTitle *test2 = [[MasterRollingTitle alloc] initWithFrame:CGRectMake(140, 150, 100, 45) And:@"心理学" Andsubtitle:@"冥想禅修"];
 
-    NSLog(@"test");
     
     [self.view addSubview:test2];
 }

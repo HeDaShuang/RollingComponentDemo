@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#define WeakSelf __weak typeof(self) weakSelf = self;
 
 @interface MasterRollingTitle : UIView
 {

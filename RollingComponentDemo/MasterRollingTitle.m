@@ -114,14 +114,16 @@
  显示标题
  */
 -(void)showTitleRolling{
+    WeakSelf;
+    
     self.titleLabel.alpha = 1;
     [UIView animateWithDuration:0.5 animations:^{
-        self.titleLabel.frame = CGRectMake(0, 45/2-15/2, self.frame.size.width, 15);
-        self.subtitleLabel.frame = CGRectMake(0, 0, self.frame.size.width, 15);
+        weakSelf.titleLabel.frame = CGRectMake(0, 45/2-15/2, weakSelf.frame.size.width, 15);
+        weakSelf.subtitleLabel.frame = CGRectMake(0, 0, weakSelf.frame.size.width, 15);
     } completion:^(BOOL finished) {
         
-        self.subtitleLabel.alpha = 0;
-        self.subtitleLabel.frame = CGRectMake(0, 30, self.frame.size.width, 15);
+        weakSelf.subtitleLabel.alpha = 0;
+        weakSelf.subtitleLabel.frame = CGRectMake(0, 30, weakSelf.frame.size.width, 15);
     }];
 }
 
@@ -129,14 +131,15 @@
  显示副标题
  */
 -(void)showSubtitleRolling{
+    WeakSelf;
     self.subtitleLabel.alpha = 1;
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.titleLabel.frame = CGRectMake(0, 0, self.frame.size.width, 15);
-        self.subtitleLabel.frame = CGRectMake(0, 45/2-15/2, self.frame.size.width, 15);
+        weakSelf.titleLabel.frame = CGRectMake(0, 0, weakSelf.frame.size.width, 15);
+        weakSelf.subtitleLabel.frame = CGRectMake(0, 45/2-15/2, weakSelf.frame.size.width, 15);
     } completion:^(BOOL finished) {
-        self.titleLabel.alpha = 0;
-        self.titleLabel.frame = CGRectMake(0, 30, self.frame.size.width, 15);
+        weakSelf.titleLabel.alpha = 0;
+        weakSelf.titleLabel.frame = CGRectMake(0, 30, weakSelf.frame.size.width, 15);
     }];
 }
 
