@@ -11,7 +11,9 @@
 @implementation MasterRollingTitle
 
 -(void)setTitleAndSubtitleWith:(NSString *)titleStr And:(NSString *)subtitleStr{
-    [self stopRolling];
+    if (rollingTimer) {
+        [self stopRolling];
+    }
     [self setupRollingViewComponentWith:titleStr Andsubtitle:subtitleStr];
 }
 
@@ -63,8 +65,6 @@
     return _bottomMaskView;
 }
 
-
-
 -(void)setupRollingViewComponentWith:(NSString *)titleStr Andsubtitle:(NSString *)subtitleStr
 {
     if (subtitleStr.length > 0) {
@@ -81,13 +81,10 @@
         self.titleLabel.frame =CGRectMake(0, 45/2-15/2, self.frame.size.width, 15);
         self.titleLabel.text = titleStr;
         self.titleLabel.backgroundColor = [UIColor whiteColor];
-        
     }
     
     self.topMaskView.frame = CGRectMake(0, 0, self.frame.size.width, 15);
     self.bottomMaskView.frame = CGRectMake(0, 30, self.frame.size.width, 15);
-    
-    NSLog(@"%@  %f",titleStr, self.frame.size.width);
 }
 
 
@@ -96,6 +93,11 @@
  */
 -(void)startRolling
 {
+    if (rollingTimer) {
+        [self stopRolling];
+    }
+    rollingTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+    showFlag = NO;
     [rollingTimer setFireDate:[NSDate distantPast]];
 }
 

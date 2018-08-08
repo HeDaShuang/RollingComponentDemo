@@ -19,11 +19,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="280-Yy-8uL">
-                                <rect key="frame" x="148" y="70" width="78" height="30"/>
+                                <rect key="frame" x="60" y="68" width="78" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="startRolling"/>
                                 <connections>
                                     <action selector="startRollingBtnSelector:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KB9-H8-yqX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba4-dh-PMv">
+                                <rect key="frame" x="219" y="68" width="77" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="stopRolling"/>
+                                <connections>
+                                    <action selector="stopRollingBtnSelector:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LmK-74-oyp"/>
                                 </connections>
                             </button>
                         </subviews>
