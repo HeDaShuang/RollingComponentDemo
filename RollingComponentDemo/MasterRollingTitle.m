@@ -10,12 +10,6 @@
 
 @implementation MasterRollingTitle
 
--(void)setTitleAndSubtitleWith:(NSString *)titleStr And:(NSString *)subtitleStr{
-    if (rollingTimer) {
-        [self stopRolling];
-    }
-    [self setupRollingViewComponentWith:titleStr Andsubtitle:subtitleStr];
-}
 
 -(UILabel *)titleLabel
 {
@@ -48,7 +42,7 @@
 -(UIView *)topMaskView{
     if (!_topMaskView) {
         _topMaskView = [UIView new];
-        _topMaskView.backgroundColor = [UIColor greenColor];
+        _topMaskView.backgroundColor = [UIColor whiteColor];
         [self addSubview:_topMaskView];
     }
     
@@ -58,33 +52,46 @@
 -(UIView *)bottomMaskView{
     if (!_bottomMaskView) {
         _bottomMaskView = [UIView new];
-        _bottomMaskView.backgroundColor = [UIColor blueColor];
+        _bottomMaskView.backgroundColor = [UIColor whiteColor];
         [self addSubview:_bottomMaskView];
     }
     
     return _bottomMaskView;
 }
 
+-(void)setTitleAndSubtitleWith:(NSString *)titleStr And:(NSString *)subtitleStr{
+    if (rollingTimer) {
+        [self stopRolling];
+    }
+    WeakSelf;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf setupRollingViewComponentWith:titleStr Andsubtitle:subtitleStr];
+    });
+    
+}
+
 -(void)setupRollingViewComponentWith:(NSString *)titleStr Andsubtitle:(NSString *)subtitleStr
 {
     if (subtitleStr.length > 0) {
-        self.titleLabel.frame =CGRectMake(0, 45/2-15/2, self.frame.size.width, 15);
+        self.titleLabel.frame =CGRectMake(0, 45/2-16/2, self.frame.size.width, 16);
         self.titleLabel.text = titleStr;
         
-        self.subtitleLabel.frame = CGRectMake(0, 30, self.frame.size.width, 15);
+        self.subtitleLabel.frame = CGRectMake(0, 30, self.frame.size.width, 16);
         self.subtitleLabel.text = subtitleStr;
         
-        rollingTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+        rollingTimer = [NSTimer scheduledTimerWithTimeInterval:2.5 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
         showFlag = NO;
         [rollingTimer setFireDate:[NSDate distantPast]];
     } else {
-        self.titleLabel.frame =CGRectMake(0, 45/2-15/2, self.frame.size.width, 15);
+        self.titleLabel.frame =CGRectMake(0, 45/2-16/2, self.frame.size.width, 16);
         self.titleLabel.text = titleStr;
-        self.titleLabel.backgroundColor = [UIColor whiteColor];
+        self.titleLabel.backgroundColor = [UIColor clearColor];
+        showFlag = YES;
     }
     
     self.topMaskView.frame = CGRectMake(0, 0, self.frame.size.width, 15);
-    self.bottomMaskView.frame = CGRectMake(0, 30, self.frame.size.width, 15);
+    self.bottomMaskView.frame = CGRectMake(0, 30, self.frame.size.width, 16);
+    
 }
 
 
@@ -119,6 +126,9 @@
         showFlag = YES;
         [self showSubtitleRolling];
     }
+    
+    self.topMaskView.frame = CGRectMake(0, 0, self.frame.size.width, 15);
+    self.bottomMaskView.frame = CGRectMake(0, 30, self.frame.size.width, 16);
 }
 
 /**
@@ -129,13 +139,14 @@
     
     self.titleLabel.alpha = 1;
     [UIView animateWithDuration:0.5 animations:^{
-        weakSelf.titleLabel.frame = CGRectMake(0, 45/2-15/2, weakSelf.frame.size.width, 15);
-        weakSelf.subtitleLabel.frame = CGRectMake(0, 0, weakSelf.frame.size.width, 15);
+        weakSelf.titleLabel.frame = CGRectMake(0, 45/2-16/2, weakSelf.frame.size.width, 16);
+        weakSelf.subtitleLabel.frame = CGRectMake(0, 0, weakSelf.frame.size.width, 16);
     } completion:^(BOOL finished) {
         
         weakSelf.subtitleLabel.alpha = 0;
-        weakSelf.subtitleLabel.frame = CGRectMake(0, 30, weakSelf.frame.size.width, 15);
+        weakSelf.subtitleLabel.frame = CGRectMake(0, 30, weakSelf.frame.size.width, 16);
     }];
+    
 }
 
 /**
@@ -146,11 +157,11 @@
     self.subtitleLabel.alpha = 1;
     
     [UIView animateWithDuration:0.5 animations:^{
-        weakSelf.titleLabel.frame = CGRectMake(0, 0, weakSelf.frame.size.width, 15);
-        weakSelf.subtitleLabel.frame = CGRectMake(0, 45/2-15/2, weakSelf.frame.size.width, 15);
+        weakSelf.titleLabel.frame = CGRectMake(0, 0, weakSelf.frame.size.width, 16);
+        weakSelf.subtitleLabel.frame = CGRectMake(0, 45/2-16/2, weakSelf.frame.size.width, 16);
     } completion:^(BOOL finished) {
         weakSelf.titleLabel.alpha = 0;
-        weakSelf.titleLabel.frame = CGRectMake(0, 30, weakSelf.frame.size.width, 15);
+        weakSelf.titleLabel.frame = CGRectMake(0, 30, weakSelf.frame.size.width, 16);
     }];
 }
 
